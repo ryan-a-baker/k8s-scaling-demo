@@ -3,7 +3,7 @@ import pika
 import time
 
 credentials = pika.PlainCredentials('admin-demo', 'dynamicscale123!')
-connection = pika.BlockingConnection(pika.ConnectionParameters('rabbit-baker-rabbitmq',credentials=credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq-server-scaling-demo',credentials=credentials))
 channel = connection.channel()
 
 channel.queue_declare(queue='task_queue', durable=True)
