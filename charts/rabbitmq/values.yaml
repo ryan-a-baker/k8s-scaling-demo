@@ -1,0 +1,27 @@
+---
+ #rabbitmqUsername: admin-demo
+ #rabbitmqPassword: dynamicscale123!
+
+ ## section of specific values for rabbitmq
+rabbitmq:
+  ## RabbitMQ application username
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  username: admin-demo
+
+  ## RabbitMQ application password
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  password: "dynamicscale123!"
+  # existingPasswordSecret: name-of-existing-secret
+
+metrics:
+  enabled: true
+  port: 9090
+
+
+
+#service:
+#  annotations:
+#    prometheus.io/scrape: 'true'
+#    prometheus.io/port: "9121"

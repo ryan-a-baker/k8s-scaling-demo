@@ -1,0 +1,85 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rabbit-scale
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: worker
+  minReplicas: 1
+  maxReplicas: 50
+  metrics:
+  # - type: Object
+  #   object:
+  #     target:
+  #       kind: Service
+  #       name: kuard
+  #     metricName: net.http.request.count
+  #     targetValue: 100
+  - type: Object
+    object:
+      metric:
+        name: rabbitmq_queue_messages
+      describedObject:
+        apiVersion: "/v1"
+        kind: Service
+        name: rabbit-baker-rabbitmq
+      target:
+        type: Value
+        #kind: Value
+        value: 100
+  # - type: Object
+  #   object:
+  #     target:
+  #       apiVersion: extensions/v1beta1
+  #       kind: Ingress
+  #       name: hello-world
+  #     targetValue: 200
+  #     metricName: requests-per-second
+
+# apiVersion: autoscaling/v2beta2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: rabbit-demo-scale
+# spec:
+#   scaleTargetRef:
+#     apiVersion: extensions/v1beta1
+#     kind: Deployment
+#     name: worker
+#   minReplicas: 1
+#   maxReplicas: 5
+#   metrics:
+#     - type: Object
+#       object:
+#         metric:
+#           name: rabbitmq_queue_messages
+#         describedObject:
+#           apiVersion: custom.metrics.k8s.io/v1beta1
+#           kind: Service
+#           name: rabbit-baker-rabbitmq
+#           apiVersion: "/v1"
+#         target:
+#           kind: Value
+#           value: 10k
+#
+# type: Object
+# object:
+#   metric:
+#     name: requests-per-second
+#   describedObject:
+#     apiVersion: networking.k8s.io/v1beta1
+#     kind: Ingress
+#     name: main-route
+#   target:
+#     type: Value
+#     value: 2k
+
+
+        # "describedObject": {
+        #   "kind": "Service",
+        #   "namespace": "hackweek-baker",
+        #   "name": "rabbit-baker-rabbitmq",
+        #   "apiVersion": "/v1"
+        # },
+        # "metricName": "rabbitmq_queue_messages",

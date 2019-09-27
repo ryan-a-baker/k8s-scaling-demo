@@ -1,0 +1,38 @@
+prometheus:
+  url: http://prometheus-server.hackweek-baker.svc.cluster.local
+  port: 80
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+
+service:
+  port: 443
+
+rules:
+  default: false
+  custom:
+  - seriesQuery: 'rabbitmq_queue_messages{kubernetes_name!="",kubernetes_namespace!=""}'
+#    resources:
+#      template: <<.Resource>>
+    resources:
+      overrides:
+        kubernetes_namespace: {resource: "namespace"}
+        kubernetes_name: {resource: "service"}
+    #name:
+    #  matches: ""
+    #  as: "my_custom_metric"
+    metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)
+    #metricsQuery: 'sum(rabbitmq_queue_messages{durable="true",policy="",queue="task_queue",vhost="/"})'
+
+  # Workingish
+  # - seriesQuery: '{__name__=~"^rabbitmq_queue_messages$"}'
+  #   resources:
+  #     template: <<.Resource>>
+  #   #name:
+  #   #  matches: ""
+  #   #  as: "my_custom_metric"
+  #   #metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)
+  #   metricsQuery: 'sum(rabbitmq_queue_messages{durable="true",policy="",queue="task_queue",vhost="/"})'
