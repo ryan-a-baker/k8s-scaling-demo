@@ -3,7 +3,7 @@
 ## Publisher
 ```kubectl run publish-tasks --image=theryanbaker/ryantest --replicas=1 publish```
 
-### Worker
+## Worker
 
 ```kubectl run worker --image=theryanbaker/ryantest --replicas=1 worker```
 
@@ -18,6 +18,6 @@ Delete the publisher quickly after to keep it from deploying tasks
 
 ```v1beta1.custom.metrics.k8s.io          rabbitmq-scaling-demo/prometheus-adapter-scaling-demo   True        17m```
 
-Check Results
+# Check Results
 
 ```kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/namespaces/hackweek-baker/services/rabbit-baker-rabbitmq/rabbitmq_queue_messages```
