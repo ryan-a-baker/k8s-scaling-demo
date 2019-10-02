@@ -1,11 +1,11 @@
 # Deploy Tasks
 
 ## Publisher
-```kubectl run publish-tasks --image=theryanbaker/ryantest --replicas=1 publish```
+```kubectl run publish -it --rm --image=theryanbaker/rabbitmq-scaling-demo --restart=Never publish 10```
 
 ## Worker
 
-```kubectl run worker --image=theryanbaker/ryantest --replicas=1 worker```
+```kubectl run worker --image=theryanbaker/rabbitmq-scaling-demo --replicas=1 worker```
 
 
 Delete the publisher quickly after to keep it from deploying tasks

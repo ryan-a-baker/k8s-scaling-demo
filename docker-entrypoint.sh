@@ -6,7 +6,7 @@ if [ "$1" = 'worker' ]; then
   python -u worker.py
 elif [ "$1" = 'publish' ]; then
   # Use -u to force python to not buffer output
-  python -u publisher.py
+  python -u publisher.py $2
 else
   echo "Nothing to do!"
 fi
