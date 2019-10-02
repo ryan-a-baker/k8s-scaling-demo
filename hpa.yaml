@@ -14,10 +14,6 @@ spec:
     object:
       metric:
         name: rabbitmq_queue_messages
-        selector: {matchLabels: {queue: tasks_queue}}
-        metricSelector:
-          matchLabels:
-            resource.labels.forwarding_rule_name: k8s-fw-default-basic-ingress--ffd629d77b6630de
       describedObject:
         apiVersion: "/v1"
         kind: Service

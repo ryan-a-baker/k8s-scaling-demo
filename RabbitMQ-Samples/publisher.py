@@ -9,7 +9,7 @@ credentials = pika.PlainCredentials('admin-demo', 'dynamicscale123!')
 connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq-server-scaling-demo',credentials=credentials))
 channel = connection.channel()
 
-channel.queue_declare(queue='task_queue-a', durable=True)
+channel.queue_declare(queue='task_queue', durable=True)
 
 for x in range(int(sys.argv[1])):
     message="Message #" + str(x)
@@ -17,7 +17,7 @@ for x in range(int(sys.argv[1])):
         message=message + "."
 
     channel.basic_publish(exchange='',
-                          routing_key='task_queue-a',
+                          routing_key='task_queue',
                           body=message,
                           properties=pika.BasicProperties(
                              delivery_mode = 2, # make message persistent
