@@ -11,6 +11,7 @@ serviceAccount:
 service:
   port: 443
 
+logLevel: 6
 rules:
   default: false
   custom:
@@ -19,4 +20,4 @@ rules:
       overrides:
         kubernetes_namespace: {resource: "namespace"}
         kubernetes_name: {resource: "service"}
-    metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)
+    metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>,queue="task_queue"}) by (<<.GroupBy>>)

@@ -1,0 +1,3 @@
+Thanks for deploying the RabbitMQ Sample Chart.  To inject sample events, run the following:
+
+kubectl run publish -it --rm --image=theryanbaker/rabbitmq-scaling-demo --restart=Never publish <number of messages>

@@ -11,7 +11,7 @@ channel = connection.channel()
 
 channel.queue_declare(queue='task_queue', durable=True)
 
-for x in range(10000):
+for x in range(int(sys.argv[1])):
     message="Message #" + str(x)
     for y in range(1,random.randint(2,10)):
         message=message + "."
